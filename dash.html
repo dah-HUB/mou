@@ -112,7 +112,7 @@ body{font-family:'DM Sans',sans-serif;background:#0d1520;color:#dde8f5;min-heigh
   </div>
   <div class="nav-right">
     <div class="live-badge"><div class="live-dot"></div><span>Live</span></div>
-    <button class="refresh-btn" onclick="loadData()">↻ Actualiser</button>
+    <button class="refresh-btn" id="refresh-btn">↻ Actualiser</button>
   </div>
 </nav>
 
@@ -329,15 +329,19 @@ function showEmpty() {
 function showDemoData() {
   allResponses = [
     {rating:5,comment:'Service excellent!',station_id:'station-loisirs',lang:'fr',timestamp:new Date().toISOString(),reasons:[],wants_contact:false,phone:''},
-    {rating:1,comment:'',station_id:'station-loisirs',lang:'ar',timestamp:new Date(Date.now()-3600000).toISOString(),reasons:['Temps d'attente / lenteur du service','Propreté de la station'],wants_contact:true,phone:'0555123456'},
-    {rating:4,comment:'Bien dans l'ensemble',station_id:'station-loisirs',lang:'en',timestamp:new Date(Date.now()-7200000).toISOString(),reasons:[],wants_contact:false,phone:''},
+    {rating:1,comment:"",station_id:"station-loisirs",lang:"ar",timestamp:new Date(Date.now()-3600000).toISOString(),reasons:["Temps d'attente / lenteur du service","Proprété de la station"],wants_contact:true,phone:"0555123456"},
+    {rating:4,comment:"Bien dans l'ensemble",station_id:"station-loisirs",lang:"en",timestamp:new Date(Date.now()-7200000).toISOString(),reasons:[],wants_contact:false,phone:""},
     {rating:2,comment:'',station_id:'station-loisirs',lang:'fr',timestamp:new Date(Date.now()-86400000).toISOString(),reasons:['Accueil / comportement du personnel'],wants_contact:false,phone:''},
   ];
   render();
 }
 
-loadData();
-setInterval(loadData, 30000);
+document.addEventListener("DOMContentLoaded", function() {
+  var btn = document.getElementById("refresh-btn");
+  if (btn) btn.onclick = loadData;
+  loadData();
+  setInterval(loadData, 30000);
+});
 </script>
 </body>
 </html>
